@@ -110,24 +110,5 @@ bot.on('message', message => {
   });
 })
 
-const credits = JSON.parse(fs.readFileSync('./dailies.json' , 'utf8'));
-
-client.on('message',async message => {
-    let alias = message.content.split(" ")[0].substring(prefix.length);
-    let args = message.content.split(" ");
-    let devs = ["529091974364397568"];
-    let mention = message.mentions.users.first() || message.author
-    if(alias === "setcredits") {
-    let args = message.content.split(" ");
-    if(!devs.includes(message.author.id)) return;
-    if(!args[1] || isNaN(args[1])) return message.reply("**Please Sir, Can you Type A Credits?**") // يرد عليه ويقله اكتب الكريدتس
-    if(!credits[mention.id]) return;
-    credits[mention.id].credits += (+args[1]);
-    fs.writeFileSync("./dailies.json", JSON.stringify(credits)); 
-    console.log(credits[mention.id])
-    message.reply(`**Done Sir!, I Have been Adedd Money For you!  : `${args[1]}`**`);
-    }
-});
-
 
 client.login(process.env.BOT_TOKEN);
